@@ -24,3 +24,10 @@ package.json(package-lock.json)の作成
 ## 他
 node_modulesが必要
 npm install
+
+## 疑問点
+- localhost:3000にアクセスすると「react-app/src/index.tsx」が表示されるのはなぜか
+=> Create React App(CRA)は内部にWebpackを使用している。Webpackがindex.tsxを出力するようになっている
+Reactアプリケーションを開発用サーバー（たとえば、npm start）で実行した場合、ブラウザが直接index.tsxなどのソースファイルを表示するのではなく、WebpackやViteなどのバンドラーが関与しています。これらのツールは、ソースコードをブラウザで実行できる形に変換して提供します。
+
+

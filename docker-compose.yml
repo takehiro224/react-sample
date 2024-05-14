@@ -14,9 +14,9 @@ services:
         source: ./app
         target: /usr/src/app
       # mode_modules用の永続化Volumeを作成して2回目以降のnode_modulesの呼び出しを高速化
-      - type: volume
-        source: node_modules_volume
-        target: /app/react-app/node_modules
+      # - type: volume
+      #   source: node_modules_volume
+      #   target: /app/react-app/node_modules
     # npmを使って起動する
     command: sh -c "cd react-app && npm start"
     ports:
