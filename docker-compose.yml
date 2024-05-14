@@ -1,0 +1,29 @@
+version: '3.9'
+services:
+  # サービス名はfront
+  front:
+    # コンテナ名はフロント
+    container_name: front
+    # ビルドコンテキストはカレントディレクトリ
+    build:
+      context: .
+      dockerfile: Dockerfile
+    # カレントディレクトリ内の`/app`のファイル・フォルダをコンテナにマウントします
+    volumes:
+      - type: bind
+        source: ./app
+        target: /usr/src/app
+      # mode_modules用の永続化Volumeを作成して2回目以降のnode_modulesの呼び出しを高速化
+      - type: volume
+        source: node_modules_volume
+        target: /app/react-app/node_modules
+    # npmを使って起動する
+    command: sh -c "cd react-app && npm start"
+    ports:
+      # デフォルトの3000ポートを使う
+      - "3000:3000"
+    # ホットリロードを有効化
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+volumes:
+  node_modules_volume:
